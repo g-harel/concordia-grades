@@ -1,7 +1,7 @@
 {
   "name": "concordia-grades",
-  "version": "0.0.0",
-  "description": "command line tool to fetch your grades from myconcordia",
+  "version": "0.0.1",
+  "description": "command line tool to scrape your grades from myconcordia",
   "author": "g-harel",
   "license": "MIT",
   "bin": {

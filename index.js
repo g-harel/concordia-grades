@@ -4,7 +4,7 @@ const puppeteer = require("puppeteer");
 
 const usage = `
 Usage: grades [USER] [PASS]
-Command line tool to fetch your grades from myconcordia`;
+Command line tool to scrape your grades from myconcordia`;
 
 if (process.argv.length < 4) {
     console.error(usage.trim());
@@ -15,10 +15,12 @@ const [user, pass] = process.argv.slice(2);
 
 const main = async () => {
     const browser = await puppeteer.launch({
+        // website times out when running headless
         headless: false,
     });
     const page = await browser.newPage();
 
+    // navigate to mobile website because it shows all grades at once
     await page.goto("https://m.myconcordia.ca/login.html", {
         waitUntil: "networkidle0"
     });
@@ -28,6 +30,7 @@ const main = async () => {
     await page.click(".login-form input.form_button_submit");
     await page.waitForNavigation({ waitUntil: "networkidle2" });
 
+    // detect if the login page has reloaded with an error message
     if (await page.$("#login_error") !== null) {
         await browser.close();
         throw new Error("invalid credentials");
@@ -62,7 +65,7 @@ const main = async () => {
     // print data
     data.forEach((c) => {
         const semester = c.semester.split(" ").reverse().join(" ");
-        const title = c.title.trim().split(" ").slice(0, 2).join("");
+        const title = c.title.trim().split(" ").slice(0, 2).join("").padEnd(8);
 
         let grade = c.grade.trim();
         if (!grade.match(/[ABCDEF][+-]?|PASS|FAIL/g)) grade = "--";
