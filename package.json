@@ -1,0 +1,21 @@
+{
+  "name": "concordia-grades",
+  "version": "0.0.0",
+  "description": "command line tool to fetch your grades from myconcordia",
+  "author": "g-harel",
+  "license": "MIT",
+  "bin": {
+    "grades": "index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/g-harel/concordia-grades.git"
+  },
+  "bugs": {
+    "url": "https://github.com/g-harel/concordia-grades/issues"
+  },
+  "homepage": "https://github.com/g-harel/concordia-grades#readme",
+  "dependencies": {
+    "puppeteer": "^1.11.0"
+  }
+}
